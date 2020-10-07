@@ -1,17 +1,18 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
-import App from './App';
-import * as serviceWorker from './serviceWorker';
+import LoginForm from './LoginForm';
+import Home from './Home'
+import { BrowserRouter, Route } from 'react-router-dom'
+import Game from './Game'
 
 ReactDOM.render(
   <React.StrictMode>
-    <App />
+    <BrowserRouter>
+          <Route exact={true} path="/" component={LoginForm}/>
+          <Route exact={true} path="/minesweeper" component={Home} />
+          <Route path="/minesweeper/game/:id" component={Game} />
+      </BrowserRouter>
   </React.StrictMode>,
   document.getElementById('root')
 );
-
-// If you want your app to work offline and load faster, you can change
-// unregister() to register() below. Note this comes with some pitfalls.
-// Learn more about service workers: https://bit.ly/CRA-PWA
-serviceWorker.unregister();
