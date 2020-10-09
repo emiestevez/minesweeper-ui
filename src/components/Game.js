@@ -28,10 +28,6 @@ class Game extends React.Component{
   }
 
   initBoardData(id) {
-    // data = [] = {x, y, ismine, neighbour, isRevealed, isEmpty, isFlagged}
-    // let data = this.createEmptyArray(height, width);
-    // data = this.plantMines(data, height, width, mines);
-    // data = this.getNeighbours(data, height, width);
     fetch(`http://localhost:8080/minesweeper/${id}`)
         .then((resp) => {
             const data = resp.json();
