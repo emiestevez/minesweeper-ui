@@ -1,10 +1,11 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
-import LoginForm from './LoginForm';
-import Home from './Home'
+import LoginForm from './components/Login/LoginForm';
+import Home from '././components/Home/Home'
 import { BrowserRouter, Route } from 'react-router-dom'
-import Game from './Game'
+import Game from './components/Game'
+
 
 ReactDOM.render(
   <React.StrictMode>

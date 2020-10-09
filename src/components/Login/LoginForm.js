@@ -1,10 +1,10 @@
 import React from 'react';
-import {Router, browserHistory} from 'react-router';
-import './App.css';
+import './LoginForm.css';
 
 
 class LoginForm extends React.Component {
   constructor(props) {
+    console.log("Login")
     super(props);
     this.state = {value: ''};
 
@@ -13,10 +13,12 @@ class LoginForm extends React.Component {
   }
 
   handleChange(event) {
+    console.log("Login-handleChange")
     this.setState({value: event.target.value});
   }
 
   handleSubmit(event) {
+    console.log("Login-handleSubmit")
     event.preventDefault();
     this.props.history.push('/minesweeper', { user: this.state.value });
   }
