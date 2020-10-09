@@ -7,8 +7,7 @@ class Game extends React.Component{
   constructor(props) {
     super(props);
     const { state } = this.props.history.location;
-    // this.state = {id: state.gameId,
-    //   boardData: this.initBoardData(state.gameId)}
+    this.state = {id: state.gameId}
     this.handleChange = this.handleChange.bind(this);
   }
 
@@ -54,18 +53,20 @@ class Game extends React.Component{
 }
 
   render() {
-    if (this.state.boardData !== undefined) {
-      const rows = this.state.boardData.rows;
-      const cols = this.state.boardData.cols;
-      const mines = this.state.boardData.mines;
-      const boardData = this.state.boardData;
-      return (
-        <div className="App beginForm">
-            <div className="game"> Minesweeper Home Page
-            <Board gameId={this.state.id} rows={rows} cols={cols} mines={mines} boardData={boardData} onChange={this.handleChange}/>
-        </div>
-        </div>
-      )  
+    if (this.state !== null) {
+      if (this.state.boardData !== undefined) {
+        const rows = this.state.boardData.rows;
+        const cols = this.state.boardData.cols;
+        const mines = this.state.boardData.mines;
+        const boardData = this.state.boardData;
+        return (
+          <div className="App beginForm">
+              <div className="game"> Minesweeper Home Page
+              <Board gameId={this.state.id} rows={rows} cols={cols} mines={mines} boardData={boardData} onChange={this.handleChange}/>
+          </div>
+          </div>
+        )  
+      }
     }
     return (
       <div className="App beginForm">
