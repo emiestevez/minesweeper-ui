@@ -10,10 +10,10 @@ class Home extends React.Component{
     super(props);
     const { state } = this.props.history.location;
     this.state = { user: state.user, redirectToGame: false, mines: 0, cols: 0, rows: 0 }
-    this.findGames(this.state.user);
+    //this.findGames(this.state.user);
   }
 
-  findGames() {
+  componentDidMount() {
     fetch(`http://localhost:8080/minesweeper/user/${this.state.user}`)
         .then((resp) => {
             const data = resp.json();
@@ -80,9 +80,9 @@ class Home extends React.Component{
         return data;
       })
       .then((data)=>{
-        var lala = this.state.userGames;
-        lala.push(data);
-        this.setState({ userGames: lala, user: this.state.user });
+        var games = this.state.userGames;
+        games.push(data);
+        this.setState({ userGames: games, user: this.state.user });
       })
       .catch(error => {
           this.setState({ errorMessage: error.toString() });

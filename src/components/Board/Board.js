@@ -9,7 +9,7 @@ export default class Board extends React.Component {
     this.state = {
       //boardData: this.initBoardData(this.props.height, this.props.width, this.props.mines),
       boardData: this.drawBoard(this.props.boardData, this.props.rows),
-      gameStatus: "Game in progress",
+      gameStatus: this.props.boardData.minesWeeperStatus,
       mineCount: this.props.mines,
       rows: this.props.rows,
       cols: this.props.cols,
@@ -55,7 +55,7 @@ export default class Board extends React.Component {
         .then((data)=>{
             this.setState({
               boardData: this.drawBoard(data, this.props.rows),
-              gameStatus: "Game in progress",
+              gameStatus:this.props.minesWeeperStatus,
               mineCount: this.props.mines,
               rows: this.props.rows,
               cols: this.props.cols,

@@ -33,7 +33,7 @@ function UserGames(games){
     }
     return (
       <div>
-          <h1>Previous games</h1>
+          <h1>User's games</h1>
           <Table className="table" id="table" data={data} />
       </div>
     )

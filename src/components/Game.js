@@ -7,12 +7,12 @@ class Game extends React.Component{
   constructor(props) {
     super(props);
     const { state } = this.props.history.location;
-    this.state = {id: state.gameId,
-      boardData: this.initBoardData(state.gameId)}
+    // this.state = {id: state.gameId,
+    //   boardData: this.initBoardData(state.gameId)}
     this.handleChange = this.handleChange.bind(this);
   }
 
-  /* componentDidMount() {
+  componentDidMount() {
     fetch(`http://localhost:8080/minesweeper/${this.state.id}`)
         .then((resp) => {
             const data = resp.json();
@@ -23,10 +23,10 @@ class Game extends React.Component{
             return data;
         })
         .then((data) => {
-            this.setState({ id: data.id, game: data});
+            this.setState({ id: data.id, boardData: data});
         })
         .catch(console.log)
-  } */
+  }
 
   initBoardData(id) {
     // data = [] = {x, y, ismine, neighbour, isRevealed, isEmpty, isFlagged}
