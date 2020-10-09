@@ -71,6 +71,40 @@ export default class Board extends React.Component {
   }
 
   handleContextMenu(e, x, y) {
+    fetch(`http://localhost:8080/minesweeper/game/cell/flag`, {
+            method: 'PUT',
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({
+                gameId: this.state.gameId,
+                row: x,
+                col: y
+            })
+        })
+        .then((resp) => {
+            const data =  resp.json();
+            if(!resp.ok){
+                const error = (data && data.message) || resp.status;
+                return Promise.reject(error);
+            }
+            return data;
+        })
+        .then((data)=>{
+            this.setState({
+              boardData: this.drawBoard(data, this.props.rows),
+              gameStatus:this.props.minesWeeperStatus,
+              mineCount: this.props.mines,
+              rows: this.props.rows,
+              cols: this.props.cols,
+              gameId: this.props.gameId
+            });
+        })
+        .catch(error => {
+            this.setState({ errorMessage: error.toString() });
+            console.error(error);
+        });
   }
 
   renderBoard() {

@@ -1,7 +1,6 @@
 import { ContentSort } from "material-ui/svg-icons";
 import React from "react";
 import Board from "./Board/Board";
-import './style.scss';
 class Game extends React.Component{
 
   constructor(props) {

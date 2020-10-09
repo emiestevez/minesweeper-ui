@@ -93,7 +93,7 @@ class Home extends React.Component{
   render() {
     return (
       <div className="App beginForm">
-          <div className="title"> Minesweeper Home Page
+          <div className="title"> <h2>Minesweeper Home Page</h2>
 
           <form noValidate autoComplete="off">
             <TextField id="rows" label="Rows" value={this.state.rows} onChange={event => this.handleChangeRow(event.target.value)} />

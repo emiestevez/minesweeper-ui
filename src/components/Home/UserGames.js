@@ -1,19 +1,33 @@
-import { ContentSort } from "material-ui/svg-icons";
 import React from "react";
 import Reactable from 'reactable';
 import { Link } from 'react-router-dom';
-import { makeStyles } from '@material-ui/core/styles';
 import Table from '@material-ui/core/Table';
 import TableBody from '@material-ui/core/TableBody';
 import TableCell from '@material-ui/core/TableCell';
 import TableContainer from '@material-ui/core/TableContainer';
 import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
+import Paper from '@material-ui/core/Paper';
+
+import { makeStyles } from '@material-ui/core/styles';
+
+const useStyles = makeStyles({
+  root: {
+    background: 'linear-gradient(45deg, #FE6B8B 30%, #FF8E53 90%)',
+    border: 0,
+    borderRadius: 3,
+    boxShadow: '0 3px 5px 2px rgba(255, 105, 135, .3)',
+    color: 'white',
+    height: 48,
+    padding: '0 30px',
+  },
+});
 
 
 function UserGames(games){
+  const classes = useStyles();
   console.log("Games: ", games);
-    var Table = Reactable.Table;
+    //var Table = Reactable.Table;
     const userGames = games.games;
 
     let data = [];
@@ -22,6 +36,7 @@ function UserGames(games){
         const link = `/minesweeper/game/${element.id}`;
 
         data.push({
+            id: element.id,
             rows: element.rows,
             cols: element.cols,
             mines: element.mines,
@@ -33,8 +48,29 @@ function UserGames(games){
     }
     return (
       <div>
-          <h1>User's games</h1>
-          <Table className="table" id="table" data={data} />
+          <h3>User's games</h3>
+          <Table className={classes.table} aria-label="simple table">
+        <TableHead>
+          <TableRow>
+            <TableCell align="center">Rows</TableCell>
+            <TableCell align="center">Cols</TableCell>
+            <TableCell align="center">Mines</TableCell>
+            <TableCell align="center">Status</TableCell>
+            <TableCell align="center">Action</TableCell>
+          </TableRow>
+        </TableHead>
+        <TableBody>
+          {data.map((row) => (
+            <TableRow key={row.id}>
+              <TableCell align="center">{row.rows}</TableCell>
+              <TableCell align="center">{row.cols}</TableCell>
+              <TableCell align="center">{row.mines}</TableCell>
+              <TableCell align="center">{row.status}</TableCell>
+              <TableCell align="center">{row.action}</TableCell>
+            </TableRow>
+          ))}
+        </TableBody>
+      </Table>
       </div>
     )
 }

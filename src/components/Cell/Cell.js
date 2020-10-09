@@ -5,7 +5,7 @@ export default class Cell extends React.Component {
   getValue() {
     const { value } = this.props;
 
-    if (!value.covered && value.flag) {
+    if (value.flag) {
       return "🚩";
     }
     if (!value.covered && value.mine) {
