@@ -1,13 +1,13 @@
 import React from 'react';
 import Cell from './../Cell/Cell';
 
+
 export default class Board extends React.Component {
 
   constructor(props) {
     console.log("Board");
     super(props);
     this.state = {
-      //boardData: this.initBoardData(this.props.height, this.props.width, this.props.mines),
       boardData: this.drawBoard(this.props.boardData, this.props.rows),
       gameStatus: this.props.boardData.minesWeeperStatus,
       mineCount: this.props.mines,
@@ -18,7 +18,6 @@ export default class Board extends React.Component {
   }
 
   drawBoard(data, rows) {
-    console.log("drawing...");
     let board = []
     for (var i = 0; i < rows; i++) {
       var aux = data.cells.filter(cell => cell.row === i);
@@ -55,7 +54,7 @@ export default class Board extends React.Component {
         .then((data)=>{
             this.setState({
               boardData: this.drawBoard(data, this.props.rows),
-              gameStatus:this.props.minesWeeperStatus,
+              gameStatus:data.minesWeeperStatus,
               mineCount: this.props.mines,
               rows: this.props.rows,
               cols: this.props.cols,
@@ -94,7 +93,7 @@ export default class Board extends React.Component {
         .then((data)=>{
             this.setState({
               boardData: this.drawBoard(data, this.props.rows),
-              gameStatus:this.props.minesWeeperStatus,
+              gameStatus:data.minesWeeperStatus,
               mineCount: this.props.mines,
               rows: this.props.rows,
               cols: this.props.cols,
@@ -110,11 +109,13 @@ export default class Board extends React.Component {
   renderBoard() {
     return this.state.boardData.map((datarow) => {
       return datarow.map((dataitem) => {
+        const disabled = !dataitem.covered || this.state.gameStatus === 'WIN' || this.state.gameStatus === 'GAME_OVER';
         return (
+          
           <div key={dataitem.row * datarow.length + dataitem.col}>
             <Cell
-              onClick={() => this.handleCellClick(dataitem.row, dataitem.col)}
-              cMenu={(e) => this.handleContextMenu(e, dataitem.row, dataitem.col)}
+              onClick={() => !disabled && this.handleCellClick(dataitem.row, dataitem.col)}
+              cMenu={(e) => !disabled && this.handleContextMenu(e, dataitem.row, dataitem.col)}
               value={dataitem}
             />
             {(datarow[datarow.length - 1] === dataitem) ? <div className="clear" /> : ""}
