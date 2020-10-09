@@ -56,23 +56,8 @@ class Home extends React.Component{
       rows: this.state.rows });
   }
 
-  // componentDidMount() {
-  //   fetch(`http://localhost:8080/minesweeper/user/${this.state.user}`)
-  //       .then((resp) => {
-  //           const data = resp.json();
-  //           if (!resp.ok) {
-  //               const error = (data && data.message) || resp.status;
-  //               return Promise.reject(error);
-  //           }
-  //           return data;
-  //       })
-  //       .then((data) => {
-  //           this.setState({ userGames: data, user: this.state.user });
-  //       })
-  //       .catch(console.log)
-  // }
-
   handleSubmit() {
+    console.log("state0: ", this.state);
     fetch(`http://localhost:8080/minesweeper`, {
             method: 'POST',
             headers: {
@@ -86,7 +71,23 @@ class Home extends React.Component{
                 mines: this.state.mines
             })
         })
-      .catch(console.log)
+      .then((resp) => {
+        const data =  resp.json();
+        if(!resp.ok){
+            const error = (data && data.message) || resp.status;
+            return Promise.reject(error);
+        }
+        return data;
+      })
+      .then((data)=>{
+        var lala = this.state.userGames;
+        lala.push(data);
+        this.setState({ userGames: lala, user: this.state.user });
+      })
+      .catch(error => {
+          this.setState({ errorMessage: error.toString() });
+          console.error(error);
+      });
   }
 
   render() {

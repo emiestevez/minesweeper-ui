@@ -12,6 +12,7 @@ import TableRow from '@material-ui/core/TableRow';
 
 
 function UserGames(games){
+  console.log("Games: ", games);
     var Table = Reactable.Table;
     const userGames = games.games;
 
@@ -24,7 +25,7 @@ function UserGames(games){
             rows: element.rows,
             cols: element.cols,
             mines: element.mines,
-            status: element.status,
+            status: element.minesWeeperStatus,
             action: <Link to={{ pathname: link, state: { gameId: element.id } }}>Play</Link>
         });
       });
