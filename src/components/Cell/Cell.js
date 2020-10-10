@@ -26,7 +26,7 @@ export default class Cell extends React.Component {
     const { value, onClick, cMenu } = this.props;
     let className =
       "cell" +
-      (value.covered ? "" : " hidden") +
+      (value.covered ? "" : " hidden cell__visible cell__visible__" + this.getValue()) +
       (value.mine ? " is-mine" : "") +
       (value.flag ? " is-flag" : "");
 

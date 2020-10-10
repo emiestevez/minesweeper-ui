@@ -34,6 +34,12 @@ function UserGames(games){
     if (userGames !== undefined) {
       userGames.forEach(element => {
         const link = `/minesweeper/game/${element.id}`;
+        let action;
+        if (element.minesWeeperStatus === 'WIN' || element.minesWeeperStatus === 'GAME_OVER') {
+          action = <Link to={{ pathname: link, state: { gameId: element.id } }}>Watch</Link>
+        } else {
+          action = <Link to={{ pathname: link, state: { gameId: element.id } }}>Play</Link>
+        }
 
         data.push({
             id: element.id,
@@ -41,7 +47,8 @@ function UserGames(games){
             cols: element.cols,
             mines: element.mines,
             status: element.minesWeeperStatus,
-            action: <Link to={{ pathname: link, state: { gameId: element.id } }}>Play</Link>
+            time: (new Date(element.gameLastUpdate).getTime() - new Date(element.gameCreated).getTime()) / 1000,
+            action: action
         });
       });
     
@@ -55,6 +62,7 @@ function UserGames(games){
             <TableCell align="center">Rows</TableCell>
             <TableCell align="center">Cols</TableCell>
             <TableCell align="center">Mines</TableCell>
+            <TableCell align="center">Time (sec)</TableCell>
             <TableCell align="center">Status</TableCell>
             <TableCell align="center">Action</TableCell>
           </TableRow>
@@ -65,6 +73,7 @@ function UserGames(games){
               <TableCell align="center">{row.rows}</TableCell>
               <TableCell align="center">{row.cols}</TableCell>
               <TableCell align="center">{row.mines}</TableCell>
+              <TableCell align="center">{row.time}</TableCell>
               <TableCell align="center">{row.status}</TableCell>
               <TableCell align="center">{row.action}</TableCell>
             </TableRow>

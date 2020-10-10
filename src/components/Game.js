@@ -56,7 +56,8 @@ class Game extends React.Component{
         const boardData = this.state.boardData;
         return (
           <div className="App beginForm">
-              <div className="game"> Minesweeper Home Page
+              <div className="game title"> 
+              <h2>Minesweeper Home Page</h2>
               <Board gameId={this.state.id} rows={rows} cols={cols} mines={mines} boardData={boardData} onChange={this.handleChange}/>
           </div>
           </div>

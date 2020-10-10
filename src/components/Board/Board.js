@@ -1,16 +1,14 @@
 import React from 'react';
 import Cell from './../Cell/Cell';
 
-
 export default class Board extends React.Component {
 
   constructor(props) {
-    console.log("Board");
     super(props);
     this.state = {
       boardData: this.drawBoard(this.props.boardData, this.props.rows),
       gameStatus: this.props.boardData.minesWeeperStatus,
-      mineCount: this.props.mines,
+      mineCount: this.props.boardData.minesRemaining,
       rows: this.props.rows,
       cols: this.props.cols,
       gameId: this.props.gameId
@@ -55,7 +53,7 @@ export default class Board extends React.Component {
             this.setState({
               boardData: this.drawBoard(data, this.props.rows),
               gameStatus:data.minesWeeperStatus,
-              mineCount: this.props.mines,
+              mineCount: data.minesRemaining,
               rows: this.props.rows,
               cols: this.props.cols,
               gameId: this.props.gameId
@@ -94,7 +92,7 @@ export default class Board extends React.Component {
             this.setState({
               boardData: this.drawBoard(data, this.props.rows),
               gameStatus:data.minesWeeperStatus,
-              mineCount: this.props.mines,
+              mineCount: data.minesRemaining,
               rows: this.props.rows,
               cols: this.props.cols,
               gameId: this.props.gameId
@@ -109,7 +107,7 @@ export default class Board extends React.Component {
   renderBoard() {
     return this.state.boardData.map((datarow) => {
       return datarow.map((dataitem) => {
-        const disabled = !dataitem.covered || this.state.gameStatus === 'WIN' || this.state.gameStatus === 'GAME_OVER';
+        const disabled = (!dataitem.covered && !dataitem.flag) || this.state.gameStatus === 'WIN' || this.state.gameStatus === 'GAME_OVER';
         return (
           
           <div key={dataitem.row * datarow.length + dataitem.col}>
@@ -126,15 +124,18 @@ export default class Board extends React.Component {
   }
 
   render() {
+    let classGameInfo = "game-info game-info__visible__" + this.state.gameStatus;
     return (
       <div className="board">
-        <div className="game-info">
+        <div className={classGameInfo}>
           <span className="info">Mines remaining: {this.state.mineCount}</span>
           <h1 className="info">{this.state.gameStatus}</h1>
         </div>
-        {
-          this.renderBoard(this.state.boardData)
-        }
+        <div className="container">
+          {
+            this.renderBoard(this.state.boardData)
+          }
+        </div>
       </div>
     );
   }
