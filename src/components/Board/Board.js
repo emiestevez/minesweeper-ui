@@ -94,7 +94,7 @@ export default class Board extends React.Component {
   }
 
   handleCellClick(x, y) {
-    fetch(`http://localhost:8080/minesweeper/game/cell`, {
+    fetch(`http://localhost:8080/minesweeper/cell`, {
             method: 'PUT',
             headers: {
                 'Accept': 'application/json',
@@ -131,7 +131,7 @@ export default class Board extends React.Component {
   }
 
   handleContextMenu(e, x, y) {
-    fetch(`http://localhost:8080/minesweeper/game/cell/flag`, {
+    fetch(`http://localhost:8080/minesweeper/cell/flag`, {
             method: 'PUT',
             headers: {
                 'Accept': 'application/json',
