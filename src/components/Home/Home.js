@@ -57,7 +57,7 @@ class Home extends React.Component{
   }
 
   handleSubmit() {
-    console.log("state0: ", this.state);
+    
     fetch(`http://localhost:8080/minesweeper`, {
             method: 'POST',
             headers: {
