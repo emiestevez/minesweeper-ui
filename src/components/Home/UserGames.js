@@ -1,13 +1,10 @@
 import React from "react";
-import Reactable from 'reactable';
 import { Link } from 'react-router-dom';
 import Table from '@material-ui/core/Table';
 import TableBody from '@material-ui/core/TableBody';
 import TableCell from '@material-ui/core/TableCell';
-import TableContainer from '@material-ui/core/TableContainer';
 import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
-import Paper from '@material-ui/core/Paper';
 
 import { makeStyles } from '@material-ui/core/styles';
 
@@ -23,6 +20,20 @@ const useStyles = makeStyles({
   },
 });
 
+function StatusMessage(status) {
+  let message = status.game;
+  if (status.game === 'WIN') {
+      message = "Win";
+  }
+  if (status.game === 'GAME_OVER') {
+    message = "Game over";
+  }
+  if (status.game === 'GAME_IN_PROGRESS') {
+    message = "In progress";
+  }
+
+  return (<div>{message}</div>)
+}
 
 function UserGames(games){
   const classes = useStyles();
@@ -74,7 +85,7 @@ function UserGames(games){
                   <TableCell align="center">{row.cols}</TableCell>
                   <TableCell align="center">{row.mines}</TableCell>
                   <TableCell align="center">{row.time}</TableCell>
-                  <TableCell align="center">{row.status}</TableCell>
+                  <TableCell align="center"><StatusMessage game={row.status}/></TableCell>
                   <TableCell align="center">{row.action}</TableCell>
                 </TableRow>
               ))}
