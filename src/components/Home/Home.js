@@ -83,7 +83,7 @@ class Home extends React.Component{
         var games = this.state.userGames;
         games.push(data);
         //this.setState({ userGames: games, user: this.state.user });
-        this.setState({ user: data.user, redirectToGame: true, gameInfo: data, link: `/minesweeper/game/${data.id}` })
+        this.setState({ user: data.userName, redirectToGame: true, gameInfo: data, link: `/minesweeper/game/${data.id}` })
       })
       .catch(error => {
           this.setState({ errorMessage: error.toString() });
