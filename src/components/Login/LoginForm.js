@@ -28,9 +28,9 @@ class LoginForm extends React.Component {
         <h1>MinesWeeper Game</h1>
         <div>
         
-        <form noValidate autoComplete="off">
+        <form noValidate autoComplete="off" onSubmit={this.handleSubmit}>
             <TextField id="userName" label="User Name" value={this.state.value} onChange={event => this.handleChangeUserName(event.target.value)}/>
-            <br></br><Button className="button" onClick={() => this.handleSubmit()}>Login</Button>
+            <br></br><Button className="button" type="submit">Login</Button>
           </form>
       </div>
       </div>

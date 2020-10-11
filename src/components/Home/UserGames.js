@@ -57,29 +57,29 @@ function UserGames(games){
       <div>
           <h3>User's games</h3>
           <Table className={classes.table} aria-label="simple table">
-        <TableHead>
-          <TableRow>
-            <TableCell align="center">Rows</TableCell>
-            <TableCell align="center">Cols</TableCell>
-            <TableCell align="center">Mines</TableCell>
-            <TableCell align="center">Time (sec)</TableCell>
-            <TableCell align="center">Status</TableCell>
-            <TableCell align="center">Action</TableCell>
-          </TableRow>
-        </TableHead>
-        <TableBody>
-          {data.map((row) => (
-            <TableRow key={row.id}>
-              <TableCell align="center">{row.rows}</TableCell>
-              <TableCell align="center">{row.cols}</TableCell>
-              <TableCell align="center">{row.mines}</TableCell>
-              <TableCell align="center">{row.time}</TableCell>
-              <TableCell align="center">{row.status}</TableCell>
-              <TableCell align="center">{row.action}</TableCell>
-            </TableRow>
-          ))}
-        </TableBody>
-      </Table>
+            <TableHead className="user-games">
+              <TableRow>
+                <TableCell align="center">Rows</TableCell>
+                <TableCell align="center">Cols</TableCell>
+                <TableCell align="center">Mines</TableCell>
+                <TableCell align="center">Time (sec)</TableCell>
+                <TableCell align="center">Status</TableCell>
+                <TableCell align="center">Action</TableCell>
+              </TableRow>
+            </TableHead>
+            <TableBody>
+              {data.map((row) => (
+                <TableRow key={row.id}>
+                  <TableCell align="center">{row.rows}</TableCell>
+                  <TableCell align="center">{row.cols}</TableCell>
+                  <TableCell align="center">{row.mines}</TableCell>
+                  <TableCell align="center">{row.time}</TableCell>
+                  <TableCell align="center">{row.status}</TableCell>
+                  <TableCell align="center">{row.action}</TableCell>
+                </TableRow>
+              ))}
+            </TableBody>
+          </Table>
       </div>
     )
 }
