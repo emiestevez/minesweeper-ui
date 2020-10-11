@@ -47,7 +47,7 @@ function UserGames(games){
             cols: element.cols,
             mines: element.mines,
             status: element.minesWeeperStatus,
-            time: (new Date(element.gameLastUpdate).getTime() - new Date(element.gameCreated).getTime()) / 1000,
+            time: element.timeTracking,
             action: action
         });
       });

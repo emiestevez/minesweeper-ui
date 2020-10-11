@@ -54,6 +54,15 @@ body {
     }
   }
 
+  .status {
+      &__WIN {
+        color: #10b71d
+      }
+      &__GAME_OVER {
+        color: #ea4823
+      }
+  }
+
   .cell {
     background: #bdbdbd;
     border: 1px solid #7b7b7b;

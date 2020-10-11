@@ -1,5 +1,6 @@
 import React from 'react';
 import Cell from './../Cell/Cell';
+import Button from '@material-ui/core/Button';
 
 export default class Board extends React.Component {
 
@@ -11,7 +12,8 @@ export default class Board extends React.Component {
       mineCount: this.props.boardData.minesRemaining,
       rows: this.props.rows,
       cols: this.props.cols,
-      gameId: this.props.gameId
+      gameId: this.props.gameId,
+      errorMessage: ''
     };
   }
 
@@ -26,9 +28,67 @@ export default class Board extends React.Component {
 
   
   // Handle User Events
+  handlePause() {
+    fetch(`http://localhost:8080/minesweeper/` + this.state.gameId + "/pause" , {
+            method: 'PUT',
+            mode: "cors"
+        })
+        .then((resp) => {
+            const data =  resp.json();
+            if(!resp.ok){
+                const error = (data && data.message) || resp.status;
+                return Promise.reject(error);
+            }
+            return data;
+        })
+        .then((data)=>{
+            this.setState({
+              boardData: this.drawBoard(data, this.props.rows),
+              gameStatus:data.minesWeeperStatus,
+              mineCount: data.minesRemaining,
+              rows: this.props.rows,
+              cols: this.props.cols,
+              gameId: this.props.gameId
+            });
+            
+            //this.props.onChange(data);
+        })
+        .catch(error => {
+            this.setState({ errorMessage: error.toString() });
+            console.error(error);
+        });
+  }
+
+  handleResume() {
+    fetch(`http://localhost:8080/minesweeper/` + this.state.gameId + "/resume" , {
+            method: 'PUT',
+            mode: "cors"
+        })
+        .then((resp) => {
+            const data =  resp.json();
+            if(!resp.ok){
+                const error = (data && data.message) || resp.status;
+                return Promise.reject(error);
+            }
+            return data;
+        })
+        .then((data)=>{
+            this.setState({
+              boardData: this.drawBoard(data, this.props.rows),
+              gameStatus:data.minesWeeperStatus,
+              mineCount: data.minesRemaining,
+              rows: this.props.rows,
+              cols: this.props.cols,
+              gameId: this.props.gameId
+            });
+        })
+        .catch(error => {
+            this.setState({ errorMessage: error.toString() });
+            console.error(error);
+        });
+  }
 
   handleCellClick(x, y) {
-    console.log("HandleClick: ",x, y);
     fetch(`http://localhost:8080/minesweeper/game/cell`, {
             method: 'PUT',
             headers: {
@@ -58,11 +118,9 @@ export default class Board extends React.Component {
               cols: this.props.cols,
               gameId: this.props.gameId
             });
-            
-            //this.props.onChange(data);
         })
         .catch(error => {
-            this.setState({ errorMessage: error.toString() });
+            this.setState({ error: error.toString() });
             console.error(error);
         });
   }
@@ -107,9 +165,9 @@ export default class Board extends React.Component {
   renderBoard() {
     return this.state.boardData.map((datarow) => {
       return datarow.map((dataitem) => {
-        const disabled = (!dataitem.covered && !dataitem.flag) || this.state.gameStatus === 'WIN' || this.state.gameStatus === 'GAME_OVER';
+        const disabled = (!dataitem.covered && !dataitem.flag) || this.state.gameStatus === 'WIN' 
+              || this.state.gameStatus === 'GAME_OVER' || this.state.gameStatus === 'PAUSE';
         return (
-          
           <div key={dataitem.row * datarow.length + dataitem.col}>
             <Cell
               onClick={() => !disabled && this.handleCellClick(dataitem.row, dataitem.col)}
@@ -124,13 +182,19 @@ export default class Board extends React.Component {
   }
 
   render() {
-    let classGameInfo = "game-info game-info__visible__" + this.state.gameStatus;
+    const classGameInfo = "game-info game-info__visible__" + this.state.gameStatus;
+    const disabled = this.state.gameStatus === 'WIN' || this.state.gameStatus === 'GAME_OVER';
     return (
+      
       <div className="board">
+        { this.state.errorMessage &&
+      <h3 className="error"> { this.state.errorMessage } </h3> }
         <div className={classGameInfo}>
           <span className="info">Mines remaining: {this.state.mineCount}</span>
           <h1 className="info">{this.state.gameStatus}</h1>
         </div>
+        <Button className="button" onClick={() => !disabled && this.handlePause()}>Pause</Button>
+        <Button className="button" onClick={() => !disabled && this.handleResume()}>Resume</Button>
         <div className="container">
           {
             this.renderBoard(this.state.boardData)
