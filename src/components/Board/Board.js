@@ -194,6 +194,16 @@ export default class Board extends React.Component {
 
     const classGameInfo = "game-info game-info__visible__" + this.state.gameStatus;
     const disabled = this.state.gameStatus === 'WIN' || this.state.gameStatus === 'GAME_OVER';
+    let statusGame = this.state.gameStatus;
+    if (this.state.gameStatus === 'WIN') {
+      statusGame = 'Congratulations!!! you win!!!';
+    }
+    if (this.state.gameStatus === 'GAME_OVER') {
+      statusGame = 'Ups!!! you loose!!!';
+    }
+    if (this.state.gameStatus === 'GAME_IN_PROGRESS') {
+      statusGame = 'Playing...';
+    }
     return (
       
       <div className="board">
@@ -201,7 +211,7 @@ export default class Board extends React.Component {
       <h3 className="error"> { this.state.errorMessage } </h3> }
         <div className={classGameInfo}>
           <span className="info">Mines remaining: {this.state.mineCount}</span>
-          <h1 className="info">{this.state.gameStatus}</h1>
+          <h1 className="info">{statusGame}</h1>
         </div>
         <Button className="button" onClick={() => this.handleUserGames()}>User's Games</Button>
         <Button className="button" onClick={() => !disabled && this.handlePause()}>Pause</Button>
