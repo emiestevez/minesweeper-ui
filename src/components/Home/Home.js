@@ -2,6 +2,7 @@ import React from "react";
 import UserGames from "./UserGames";
 import Button from '@material-ui/core/Button';
 import TextField from '@material-ui/core/TextField';
+import { Link, Redirect } from 'react-router-dom';
 
 class Home extends React.Component{
 
@@ -10,7 +11,6 @@ class Home extends React.Component{
     super(props);
     const { state } = this.props.history.location;
     this.state = { user: state.user, redirectToGame: false, mines: 0, cols: 0, rows: 0 }
-    //this.findGames(this.state.user);
   }
 
   componentDidMount() {
@@ -82,7 +82,8 @@ class Home extends React.Component{
       .then((data)=>{
         var games = this.state.userGames;
         games.push(data);
-        this.setState({ userGames: games, user: this.state.user });
+        //this.setState({ userGames: games, user: this.state.user });
+        this.setState({ user: data.user, redirectToGame: true, gameInfo: data, link: `/minesweeper/game/${data.id}` })
       })
       .catch(error => {
           this.setState({ errorMessage: error.toString() });
@@ -91,6 +92,10 @@ class Home extends React.Component{
   }
 
   render() {
+
+    if (this.state.redirectToGame) {
+      return <Redirect to={{ pathname: this.state.link, state: { user: this.state.user, gameId: this.state.gameInfo.id } }} />
+    }
     return (
       <div className="App beginForm">
           <div className="title"> <h2>Minesweeper Home Page</h2>
@@ -102,7 +107,7 @@ class Home extends React.Component{
             <br></br><Button className="button" onClick={() => this.handleSubmit()}>Create</Button>
           </form>
 
-          <UserGames games={this.state.userGames}/>
+          <UserGames games={this.state.userGames} user={this.state.user}/>
 
           </div>
       </div>

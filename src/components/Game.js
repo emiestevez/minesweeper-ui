@@ -6,7 +6,7 @@ class Game extends React.Component{
   constructor(props) {
     super(props);
     const { state } = this.props.history.location;
-    this.state = {id: state.gameId}
+    this.state = {id: state.gameId, user: state.user}
     this.handleChange = this.handleChange.bind(this);
   }
 
@@ -58,7 +58,7 @@ class Game extends React.Component{
           <div className="App beginForm">
               <div className="game title"> 
               <h2>Minesweeper Home Page</h2>
-              <Board gameId={this.state.id} rows={rows} cols={cols} mines={mines} boardData={boardData} onChange={this.handleChange}/>
+              <Board user={this.state.user} gameId={this.state.id} rows={rows} cols={cols} mines={mines} boardData={boardData} onChange={this.handleChange}/>
           </div>
           </div>
         )  

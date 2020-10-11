@@ -1,12 +1,13 @@
 import React from 'react';
 import Cell from './../Cell/Cell';
 import Button from '@material-ui/core/Button';
-
+import { Redirect } from 'react-router-dom';
 export default class Board extends React.Component {
 
   constructor(props) {
     super(props);
     this.state = {
+      user: this.props.user,
       boardData: this.drawBoard(this.props.boardData, this.props.rows),
       gameStatus: this.props.boardData.minesWeeperStatus,
       mineCount: this.props.boardData.minesRemaining,
@@ -86,6 +87,10 @@ export default class Board extends React.Component {
             this.setState({ errorMessage: error.toString() });
             console.error(error);
         });
+  }
+
+  handleUserGames() {
+    this.setState({ user: this.state.user, redirectToGame: true, link: `/minesweeper/user/${this.state.user}` })
   }
 
   handleCellClick(x, y) {
@@ -182,6 +187,11 @@ export default class Board extends React.Component {
   }
 
   render() {
+
+    if (this.state.redirectToGame) {
+      return <Redirect to={{ pathname: this.state.link, state: { user: this.state.user} }} />
+    }
+
     const classGameInfo = "game-info game-info__visible__" + this.state.gameStatus;
     const disabled = this.state.gameStatus === 'WIN' || this.state.gameStatus === 'GAME_OVER';
     return (
@@ -193,6 +203,7 @@ export default class Board extends React.Component {
           <span className="info">Mines remaining: {this.state.mineCount}</span>
           <h1 className="info">{this.state.gameStatus}</h1>
         </div>
+        <Button className="button" onClick={() => this.handleUserGames()}>User's Games</Button>
         <Button className="button" onClick={() => !disabled && this.handlePause()}>Pause</Button>
         <Button className="button" onClick={() => !disabled && this.handleResume()}>Resume</Button>
         <div className="container">

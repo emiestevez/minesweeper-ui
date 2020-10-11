@@ -12,6 +12,7 @@ ReactDOM.render(
     <BrowserRouter>
           <Route exact={true} path="/" component={LoginForm}/>
           <Route exact={true} path="/minesweeper" component={Home} />
+          <Route path="/minesweeper/user/:user" component={Home} />
           <Route path="/minesweeper/game/:id" component={Game} />
       </BrowserRouter>
   </React.StrictMode>,

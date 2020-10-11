@@ -36,9 +36,9 @@ function UserGames(games){
         const link = `/minesweeper/game/${element.id}`;
         let action;
         if (element.minesWeeperStatus === 'WIN' || element.minesWeeperStatus === 'GAME_OVER') {
-          action = <Link to={{ pathname: link, state: { gameId: element.id } }}>Watch</Link>
+          action = <Link to={{ pathname: link, state: { gameId: element.id, user: games.user} }}>See game</Link>
         } else {
-          action = <Link to={{ pathname: link, state: { gameId: element.id } }}>Play</Link>
+          action = <Link to={{ pathname: link, state: { gameId: element.id, user: games.user } }}>Let's Play</Link>
         }
 
         data.push({
