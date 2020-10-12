@@ -2,12 +2,11 @@ import React from "react";
 import UserGames from "./UserGames";
 import Button from '@material-ui/core/Button';
 import TextField from '@material-ui/core/TextField';
-import { Link, Redirect } from 'react-router-dom';
+import {Redirect } from 'react-router-dom';
 
 class Home extends React.Component{
 
   constructor(props) {
-    console.log("Home");
     super(props);
     const { state } = this.props.history.location;
     this.state = { user: state.user, redirectToGame: false, mines: 0, cols: 0, rows: 0 }
@@ -82,7 +81,6 @@ class Home extends React.Component{
       .then((data)=>{
         var games = this.state.userGames;
         games.push(data);
-        //this.setState({ userGames: games, user: this.state.user });
         this.setState({ user: data.userName, redirectToGame: true, gameInfo: data, link: `/minesweeper/game/${data.id}` })
       })
       .catch(error => {

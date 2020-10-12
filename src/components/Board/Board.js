@@ -3,6 +3,7 @@ import Cell from './../Cell/Cell';
 import Button from '@material-ui/core/Button';
 import { Redirect } from 'react-router-dom';
 import StatusMessage from './StatusMessages';
+import Grid from '@material-ui/core/Grid';
 export default class Board extends React.Component {
 
   constructor(props) {
@@ -52,8 +53,6 @@ export default class Board extends React.Component {
               cols: this.props.cols,
               gameId: this.props.gameId
             });
-            
-            //this.props.onChange(data);
         })
         .catch(error => {
             this.setState({ errorMessage: error.toString() });
@@ -208,10 +207,22 @@ export default class Board extends React.Component {
         <Button className="button" onClick={() => this.handleUserGames()}>User's Games</Button>
         <Button className="button" onClick={() => !disabled && this.handlePause()}>Pause</Button>
         <Button className="button" onClick={() => !disabled && this.handleResume()}>Resume</Button>
-        <div className="container">
+        <div>
+
+        <Grid container spacing={3}>
+          <Grid item xs={2}>
+              <h4>How to play:</h4>
+              <b>Flag cell:</b> rigth-click<br/>
+              <b>Discover cell:</b> click
+          </Grid>
+          <Grid item xs={10}>
+            <div className="container">
           {
             this.renderBoard(this.state.boardData)
           }
+        </div>
+          </Grid>
+        </Grid>
         </div>
       </div>
     );

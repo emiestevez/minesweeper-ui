@@ -37,8 +37,6 @@ function StatusMessage(status) {
 
 function UserGames(games){
   const classes = useStyles();
-  console.log("Games: ", games);
-    //var Table = Reactable.Table;
     const userGames = games.games;
 
     let data = [];

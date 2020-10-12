@@ -5,7 +5,6 @@ import Button from '@material-ui/core/Button';
 
 class LoginForm extends React.Component {
   constructor(props) {
-    console.log("Login")
     super(props);
     this.state = {value: ''};
 
@@ -18,14 +17,13 @@ class LoginForm extends React.Component {
   }
 
   handleSubmit(event) {
-    console.log("Login-handleSubmit")
     this.props.history.push('/minesweeper', { user: this.state.value });
   }
 
   render() {
       return(
         <div className="App">
-        <h1>MinesWeeper Game</h1>
+        <h1>Minesweeper Game</h1>
         <div>
         
         <form noValidate autoComplete="off" onSubmit={this.handleSubmit}>

@@ -43,7 +43,6 @@ class Game extends React.Component{
   }
 
   handleChange(newValue) {
-    console.log("update.new value:", newValue);
     this.setState({ game: newValue });
 }
 

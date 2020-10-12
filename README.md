@@ -1,4 +1,17 @@
+## Minesweeper game
+
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+
+## How to play
+
+* You need to login into the game
+* You need to complete the dimension of the board and the mines quantity
+* Once you are in the board you can pause or resume the game
+* In the home you have a list with all the games by user
+
+** Basic commands **
+**_Click_**: discover a cell
+**_Right click_**: set a cell as flag
 
 ## Available Scripts
 
