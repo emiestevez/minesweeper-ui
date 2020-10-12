@@ -9,9 +9,15 @@ This project was bootstrapped with [Create React App](https://github.com/faceboo
 * Once you are in the board you can pause or resume the game
 * In the home you have a list with all the games by user
 
-** Basic commands **
-**_Click_**: discover a cell
-**_Right click_**: set a cell as flag
+### Basic commands
+
+**Click**: discover a cell
+
+**Right click**: set a cell as flag
+
+### Online version:
+
+http://doezjq6f9iyjn.cloudfront.net
 
 ## Available Scripts
 
