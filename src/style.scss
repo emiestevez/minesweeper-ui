@@ -1,0 +1,130 @@
+*,
+*:before,
+*:after {
+  box-sizing: border-box;
+}
+body {
+  margin: 20px;
+  padding: 0;
+  font-family: sans-serif;
+  background: #f4f4f4;
+}
+
+.user-games {
+  background: grey;
+}
+
+.clear {
+  clear: both;
+  content: "";
+}
+
+.game {
+  margin: 0 auto;
+  padding: 20px;
+
+  .game-info {
+    margin-bottom: 20px;
+    background: #19a0d9;
+    padding: 7px;
+    text-align: center;
+    //color: #fff;
+    min-height: 100px;
+    border-radius: 7px;
+    .info {
+      display: block;
+      margin-top: 15px;
+    }
+    &__visible {
+      background-color: white;
+      &__IN_PROGRESS {
+        background-color:#78a9dc;
+      }
+      &__WIN {
+        background-color:#10b71d;
+      }
+      &__GAME_OVER {
+        background-color:#ea4823;
+      } 
+    }
+  }
+
+  
+
+  .board {
+    .container {
+      padding: 30px;
+    }
+  }
+
+  .status {
+      &__WIN {
+        color: #10b71d
+      }
+      &__GAME_OVER {
+        color: #ea4823
+      }
+  }
+
+  .cell {
+    background: #bdbdbd;
+    border: 1px solid #7b7b7b;
+    float: left;
+    line-height: 25px;
+    height: 25px;
+    text-align: center;
+    width: 25px;
+    cursor: pointer;
+    border-radius: 5px;
+    color: #fff;
+    font-weight: 600;
+
+    &:focus {
+      outline: none;
+    }
+    &__visible {
+      background-color: white;
+  
+      &__1 {
+        color: blue;
+      }
+  
+      &__2 {
+        color: green;
+      }
+  
+      &__3 {
+        color: red;
+      }
+  
+      &__4 {
+        color: purple;
+      }
+  
+      &__5 {
+        color: maroon;
+      }
+  
+      &__6 {
+        color: turquoise;
+      }
+  
+      &__7 {
+        color: black;
+      }
+  
+      &__8 {
+        color: gray;
+      }
+    }
+  }
+
+  .hidden {
+    background: #fff;
+  }
+
+  .is-flag,
+  .is-mine {
+    color: #fc543c;
+  }
+}
