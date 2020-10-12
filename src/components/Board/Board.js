@@ -178,6 +178,7 @@ export default class Board extends React.Component {
               onClick={() => !disabled && this.handleCellClick(dataitem.row, dataitem.col)}
               cMenu={(e) => !disabled && this.handleContextMenu(e, dataitem.row, dataitem.col)}
               value={dataitem}
+              status={this.state.gameStatus}
             />
             {(datarow[datarow.length - 1] === dataitem) ? <div className="clear" /> : ""}
           </div>);

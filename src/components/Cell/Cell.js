@@ -3,12 +3,12 @@ import PropTypes from 'prop-types';
 
 export default class Cell extends React.Component {
   getValue() {
-    const { value } = this.props;
+    const { status, value } = this.props;
 
     if (value.flag) {
       return "🚩";
     }
-    if (!value.covered && value.mine) {
+    if ((status === 'WIN' || status === 'GAME_OVER' || !value.covered) && value.mine) {
       return "💣";
     }
     if (!value.covered && value.minesAdjacent === 0) {
