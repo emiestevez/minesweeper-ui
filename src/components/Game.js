@@ -11,7 +11,7 @@ class Game extends React.Component{
   }
 
   componentDidMount() {
-    fetch(`http://localhost:8080/minesweeper/${this.state.id}`)
+    fetch(`http://minesweeper-env.eba-vnygpypa.us-east-1.elasticbeanstalk.com/minesweeper/${this.state.id}`)
         .then((resp) => {
             const data = resp.json();
             if (!resp.ok) {
@@ -27,7 +27,7 @@ class Game extends React.Component{
   }
 
   initBoardData(id) {
-    fetch(`http://localhost:8080/minesweeper/${id}`)
+    fetch(`http://minesweeper-env.eba-vnygpypa.us-east-1.elasticbeanstalk.com/minesweeper/${id}`)
         .then((resp) => {
             const data = resp.json();
             if (!resp.ok) {

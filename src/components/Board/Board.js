@@ -31,7 +31,7 @@ export default class Board extends React.Component {
   
   // Handle User Events
   handlePause() {
-    fetch(`http://localhost:8080/minesweeper/` + this.state.gameId + "/pause" , {
+    fetch(`http://minesweeper-env.eba-vnygpypa.us-east-1.elasticbeanstalk.com/minesweeper/` + this.state.gameId + "/pause" , {
             method: 'PUT',
             mode: "cors"
         })
@@ -62,7 +62,7 @@ export default class Board extends React.Component {
   }
 
   handleResume() {
-    fetch(`http://localhost:8080/minesweeper/` + this.state.gameId + "/resume" , {
+    fetch(`http://minesweeper-env.eba-vnygpypa.us-east-1.elasticbeanstalk.com/minesweeper/` + this.state.gameId + "/resume" , {
             method: 'PUT',
             mode: "cors"
         })
@@ -95,7 +95,7 @@ export default class Board extends React.Component {
   }
 
   handleCellClick(x, y) {
-    fetch(`http://localhost:8080/minesweeper/cell`, {
+    fetch(`http://minesweeper-env.eba-vnygpypa.us-east-1.elasticbeanstalk.com/minesweeper/cell`, {
             method: 'PUT',
             headers: {
                 'Accept': 'application/json',
@@ -132,7 +132,7 @@ export default class Board extends React.Component {
   }
 
   handleContextMenu(e, x, y) {
-    fetch(`http://localhost:8080/minesweeper/cell/flag`, {
+    fetch(`http://minesweeper-env.eba-vnygpypa.us-east-1.elasticbeanstalk.com/minesweeper/cell/flag`, {
             method: 'PUT',
             headers: {
                 'Accept': 'application/json',

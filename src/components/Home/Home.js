@@ -14,7 +14,7 @@ class Home extends React.Component{
   }
 
   componentDidMount() {
-    fetch(`http://localhost:8080/minesweeper/user/${this.state.user}`)
+    fetch(`http://minesweeper-env.eba-vnygpypa.us-east-1.elasticbeanstalk.com/minesweeper/user/${this.state.user}`)
         .then((resp) => {
             const data = resp.json();
             if (!resp.ok) {
@@ -58,7 +58,7 @@ class Home extends React.Component{
 
   handleSubmit() {
     
-    fetch(`http://localhost:8080/minesweeper`, {
+    fetch(`http://minesweeper-env.eba-vnygpypa.us-east-1.elasticbeanstalk.com/minesweeper`, {
             method: 'POST',
             headers: {
                 'Accept': 'application/json',
